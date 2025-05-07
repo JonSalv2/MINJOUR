@@ -27,7 +27,7 @@ def write_to_file(filename, new_data):
 
 def add_entry():
 
-    time_stamp = datetime.datetime.now().strftime("%Y/%m/ %d %H:%M")
+    time_stamp = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
 
     entry = input()
 
