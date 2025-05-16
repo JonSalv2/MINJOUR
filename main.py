@@ -9,6 +9,10 @@ FILE_NAME = "entries.json"
 
 
 def write_to_file(file_name, new_data):
+    """ Writes the movie data to a JSON file
+        :param file_name: path to the file
+        :param new_data: new entry data
+    """
 
     # checks to see if the file exists
     if os.path.exists(file_name):
@@ -26,11 +30,17 @@ def write_to_file(file_name, new_data):
 
 
 def add_entry():
-
+    """ Prompts the user to enter a new journal entry
+        :return: entry_data: a list of key/values pairs containing new movie data
+    """
+    
+    # Get the current date and time (YYYY/MM/DD HH:MM)
     time_stamp = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
 
+    # Prompt the user for a new entry
     entry = input()
 
+    # Stores the entry data in a dictionary and adds timestamp
     entry_data = [{
         "time_stamp": time_stamp,
         "entry": entry,
@@ -40,11 +50,17 @@ def add_entry():
 
 
 def show_entries(file_name):
-
+    """ Displays the entries in the entires.json file
+        :param file_name: path to the file
+    """
+    # Checks if the file exists
     if os.path.exists(file_name):
+
+        # Loads the existing entries from the file
         with open(file_name, "r") as file:
             existing_entries = json.load(file)
 
+            # Prints the entries
             for entry in existing_entries:
                 print(f"{entry['time_stamp']}: {entry['entry']}")
 
