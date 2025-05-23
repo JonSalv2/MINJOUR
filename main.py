@@ -74,6 +74,7 @@ def show_entries(file_name):
             # Prints the entries
             for entry in existing_entries:
                 print(f"{entry['time_stamp']}: {entry['entry']}")
+                print("\n")
 
 
 def delete_entry(file_name):
@@ -113,39 +114,46 @@ def main():
     global FILE_NAME
 
     print("\n~*| MINJOUR |*~\n")
-    print("A simplistic journaling app to get your ideas down quickly, in 500 characters.")
+    print("A simplistic journaling app to get your thoughts down quickly, in 500 characters.")
     
-    user_input= input("press (enter) for a new entry\npress (r) to read your entries\npress (d) to delete an entry\npress (q) to quit\n")
+    while True:
 
-    if user_input == "":
-        while True:
+        # Prompts the user for input to add a new entry, read existing entries, delete an entry, or quit
+        user_input= input("\npress (enter) for a new entry\npress (r) to read your entries\npress (d) to delete an entry\npress (q) to quit\n")
 
-            print("~~~~~~((((Whats on your mind?))))~~~~~~\n")
+        if user_input == "":
 
-            new_data = add_entry()
-            write_to_file(FILE_NAME, new_data)
+            while True:
 
-            user_input = input("Make another entry (press y or n)? \n")
+                print("~~~~~~((((Whats on your mind?))))~~~~~~\n")
 
-            if user_input == "y":
-                continue
-            else:
-                return
+                new_data = add_entry()
+                write_to_file(FILE_NAME, new_data)
 
-    elif user_input == "r":
-        print("~~~~~~((((Your entries))))~~~~~~\n")
-        show_entries(FILE_NAME)
-        return
-    
-    elif user_input == "d":
-        print("~~~~~~((((Delete an entry))))~~~~~~\n")
-        print("Select an entry to delete by inputing the number of its corresponding ID\n")
-        delete_entry(FILE_NAME)
-        return
+                user_input = input("Make another entry (press y or n)? \n")
 
-    elif user_input == "q":
-        print("Goodbye!")
-        return
+                if user_input == "y":
+                    continue
+                else:
+                    break
+
+        elif user_input == "r":
+
+            print("~~~~~~((((Your entries))))~~~~~~\n")
+            show_entries(FILE_NAME)
+            continue
+        
+        elif user_input == "d":
+
+            print("~~~~~~((((Delete an entry))))~~~~~~\n")
+            print("Select an entry to delete by inputing the number of its corresponding ID\n")
+            delete_entry(FILE_NAME)
+            continue
+
+        elif user_input == "q":
+
+            print("~~~~~~((((Goodbye))))~~~~~~\n")
+            return
 
 if __name__ == '__main__':
     main()
