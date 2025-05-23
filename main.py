@@ -40,8 +40,18 @@ def add_entry():
     # Prompt the user for a new entry
     entry = input()
 
+    # checkes to see if the file exits 
+    # Sets the entry ID to 1 if no file exists and increments it for each new entry
+    if os.path.exists(FILE_NAME):
+        with open(FILE_NAME, "r") as file:
+            existing_entries = json.load(file)          
+            current_id = len(existing_entries) + 1
+    else:
+        current_id = 1
+
     # Stores the entry data in a dictionary and adds timestamp
     entry_data = [{
+        "id": current_id,
         "time_stamp": time_stamp,
         "entry": entry,
     }]
@@ -71,7 +81,7 @@ def main():
 
     print("\n~*| MINJOUR |*~\n")
     print("A simplistic journaling app to get your ideas down quickly, in 500 characters.")
-    user_input= input("press (enter) for a new entry\npress (r) to read your entries\npress (q) to quit\n")
+    user_input= input("press (enter) for a new entry\npress (r) to read your entries\npress (d) to delete an entry\npress (q) to quit\n")
 
     if user_input == "":
         while True:
@@ -93,6 +103,11 @@ def main():
         show_entries(FILE_NAME)
         return
     
+    elif user_input == "d":
+        print("~~~~~~((((Delete an entry))))~~~~~~\n")
+        delete_entry(FILE_NAME)
+        return
+
     elif user_input == "q":
         print("Goodbye!")
         return
