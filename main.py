@@ -82,7 +82,7 @@ def delete_entry(file_name):
         :param file_name: path to the file
     """
 
-    # Checks if the file exists
+    # Checks if the file existsq
     if os.path.exists(file_name):
         with open(file_name, "r") as file:
             existing_entries = json.load(file)
@@ -100,6 +100,10 @@ def delete_entry(file_name):
         if int(entry['id']) == entry_to_delete:
             existing_entries.remove(entry)
             print(f"Entry {entry_to_delete} deleted.")
+
+            # Reassign IDs to ensure they match the current order
+            for index, entry in enumerate(existing_entries, start=1):
+                entry['id'] = index
 
             # Writes the updated entries back to the file
             with open(file_name, mode='w') as file:
@@ -130,7 +134,7 @@ def main():
                 new_data = add_entry()
                 write_to_file(FILE_NAME, new_data)
 
-                user_input = input("Make another entry (press y or n)? \n")
+                user_input = input("\nMake another entry (press y or n)? \n")
 
                 if user_input == "y":
                     continue
