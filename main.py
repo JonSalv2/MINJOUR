@@ -82,7 +82,7 @@ def delete_entry(file_name):
         :param file_name: path to the file
     """
 
-    # Checks if the file existsq
+    # Checks if the file exists
     if os.path.exists(file_name):
         with open(file_name, "r") as file:
             existing_entries = json.load(file)
