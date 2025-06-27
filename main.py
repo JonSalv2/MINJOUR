@@ -2,8 +2,9 @@
 # A minimalistic journaling app for terminal
 
 import json
-import datetime
+import datetime 
 import os
+
 
 FILE_NAME = "entries.json"
 
@@ -40,21 +41,27 @@ def add_entry():
     # Prompt the user for a new entry
     entry = input()
 
-    # checkes to see if the file exits 
+    
     # Sets the entry ID to 1 if no file exists and increments it for each new entry
     if os.path.exists(FILE_NAME):
+        # checkes to see if the file exits 
         with open(FILE_NAME, "r") as file:
             existing_entries = json.load(file)          
             current_id = len(existing_entries) + 1
     else:
         current_id = 1
 
-    # Stores the entry data in a dictionary and adds timestamp and index ID
-    entry_data = [{
-        "id": current_id,
-        "time_stamp": time_stamp,
-        "entry": entry,
-    }]
+    # Validates the entry 
+    if entry == "":
+        print("~(Your entry is empty and was not saved)~")
+        return 
+    else:
+        # Stores the entry data in a dictionary and adds timestamp and index ID
+        entry_data = [{
+            "id": current_id,
+            "time_stamp": time_stamp,
+            "entry": entry,
+        }]
 
     return entry_data
 
@@ -117,7 +124,7 @@ def main():
 
     global FILE_NAME
 
-    print("\n~*| MINJOUR |*~\n")
+    print("\n~~~~*| MINJOUR |*~~~~\n")
     print("A simplistic journaling app to get your thoughts down quickly, in 500 characters.")
     
     while True:
@@ -125,14 +132,16 @@ def main():
         # Prompts the user for input to add a new entry, read existing entries, delete an entry, or quit
         user_input= input("\npress (enter) for a new entry\npress (r) to read your entries\npress (d) to delete an entry\npress (q) to quit\n")
 
-        if user_input == "":
+        if user_input == "": # Checking for "Enter" as input
 
             while True:
 
                 print("~~~~~~((((Whats on your mind?))))~~~~~~\n")
 
                 new_data = add_entry()
-                write_to_file(FILE_NAME, new_data)
+                
+                if new_data is not None:
+                    write_to_file(FILE_NAME, new_data)
 
                 user_input = input("\nMake another entry (press y or n)? \n")
 
@@ -143,7 +152,7 @@ def main():
 
         elif user_input == "r":
 
-            print("~~~~~~((((Your entries))))~~~~~~\n")
+            print("\n~~~~~~((((Your entries))))~~~~~~\n")
             show_entries(FILE_NAME)
             continue
         
