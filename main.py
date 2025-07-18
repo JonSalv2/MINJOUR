@@ -1,41 +1,21 @@
 # MINJOUR.
 # A minimalistic journaling app for terminal
+
 import actions
+import file_io
 import json
 import os
 
 
-FILE_NAME = "entries.json"
-
-
-def write_to_file(file_name, new_data):
-    """ Writes the movie data to a JSON file
-        :param file_name: path to the file
-        :param new_data: new entry data
-    """
-
-    # checks to see if the file exists
-    if os.path.exists(file_name):
-        with open(file_name, "r") as file:
-            existing_entries = json.load(file)
-    else:
-        existing_entries = []
-
-    # adds new data to the list
-    existing_entries.extend(new_data)
-
-    # write to file
-    with open(file_name, mode='w') as file:
-        json.dump(existing_entries, file, indent=4)
-
-
 def main():
-
-    global FILE_NAME
+    """ Main function to run the journaling app """
 
     print("\n~~~~*| MINJOUR |*~~~~\n")
-    print("A simplistic journaling app to get your thoughts down quickly, in 500 characters.")
+    print("A simplistic journaling app to get your thoughts down quickly, in 500 characters.\n")
     
+    # Allows the user to name the file where entries will be stored, defaults to "entries.json"
+    file_name = file_io.name_file()
+
     while True:
 
         # Prompts the user for input to add a new entry, read existing entries, delete an entry, or quit
@@ -45,16 +25,19 @@ def main():
 
             # Checking for "Enter" as input
             if user_input.strip() == "": 
+
+                
+
                 while True:
 
                     print("~~~~~~((((Whats on your mind?))))~~~~~~\n")
 
                     # Prompts the user to enter a new journal entry
-                    new_data = actions.add_entry(FILE_NAME)
+                    new_entry = actions.add_entry(file_name)
                     
                     # If the entry is not empty, write it to the file
-                    if new_data is not None:
-                        write_to_file(FILE_NAME, new_data)
+                    if new_entry is not None:
+                        file_io.write_to_file(file_name, new_entry)
 
                     # Checks if the user wants to make another entry
                     user_input = input("\nMake another entry (press y or n)? \n")
@@ -67,7 +50,7 @@ def main():
             elif user_input == "r":
 
                 print("\n~~~~~~((((Your entries))))~~~~~~\n")
-                actions.show_entries(FILE_NAME)
+                actions.show_entries(file_name)
                 continue
             
             # If the user wants to delete an entry
@@ -75,7 +58,7 @@ def main():
 
                 print("~~~~~~((((Delete an entry))))~~~~~~\n")
                 print("Select an entry to delete by inputing the number of its corresponding ID\n")
-                actions.delete_entry(FILE_NAME)
+                actions.delete_entry(file_name)
                 continue
             
             # If the user wants to quit the app

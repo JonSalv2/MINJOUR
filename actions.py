@@ -1,4 +1,5 @@
 # Actions that allow users to add, read, and delete journal entries.
+
 import json
 import datetime 
 import os
@@ -54,6 +55,8 @@ def show_entries(file_name):
             for entry in existing_entries:
                 print(f"{entry['time_stamp']}: {entry['entry']}")
                 print("\n")
+    else:
+        raise FileNotFoundError("No entries found. Please add an entry first.")
 
 
 def delete_entry(file_name):
@@ -69,7 +72,7 @@ def delete_entry(file_name):
             for entry in existing_entries:
                 print(f"{entry['id']}: {entry['time_stamp']}: {entry['entry']}")
     else:
-        print("No entries to delete.")
+        raise FileNotFoundError("No entries found.")
 
     # Prompts the user to select the entry they want to delete
     entry_to_delete = input()
