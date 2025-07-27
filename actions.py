@@ -85,7 +85,7 @@ def delete_entry(file_name):
             existing_entries.remove(entry)
             print(f"Entry {entry_to_delete} deleted.")
 
-            # Reassign IDs to ensure they match the current order
+            # Reassign entry IDs to ensure they match the current order
             for index, entry in enumerate(existing_entries, start=1):
                 entry['id'] = index
 

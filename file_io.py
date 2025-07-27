@@ -4,19 +4,33 @@ import json
 import os
 
 
+def list_files():
+    """ Lists all files in the current directory
+    """
+    files = os.listdir()
+    json_files = []
+
+    for file in files:
+        if file.endswith('.json'):
+            json_files.append(file)
+            print(file[:-5])  # Prints the file name without the '.json' extension
+
+    return json_files
+
+
 def name_file():
     """ Prompts the user for a file name to store entries
         :return: file_name
     """
     
     default = "entries.json"
-    user_name = input("Enter a file name to store your entries\n").strip()
+    user = input("\nEnter a file name to store your entries\n").strip()
     
     # If the user does not provide a file name, use the default
-    if not user_name.strip():
+    if not user.strip():
         return default.strip()
     
-    file_name = f"{user_name.strip()}.json"
+    file_name = f"{user.strip()}.json"
 
     return file_name
 
