@@ -5,7 +5,8 @@ import os
 
 
 def list_files():
-    """ Lists all files in the current directory
+    """ Displays all files in the current directory and returns a list 
+        :return: list of JSON files
     """
     files = os.listdir()
     json_files = []

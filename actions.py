@@ -1,4 +1,4 @@
-# Actions that allow users to add, read, and delete journal entries.
+ # Actions that allow users to add, read, and delete journal entries.
 
 import json
 import datetime 
@@ -8,6 +8,7 @@ import re
 def add_entry(file_name):
     """ Prompts the user to enter a new journal entry
         :return: entry_data: a list of key/values pairs containing new movie data
+        :param file_name: path to the file
     """
     
     # Get the current date and time (YYYY/MM/DD HH:MM)

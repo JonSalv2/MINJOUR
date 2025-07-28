@@ -9,7 +9,7 @@ import json
 def main():
     """ Main function to run the journaling app """
 
-    print("\n     ~~~~~~~~~~*****| MINJOUR |*****~~~~~~~~~~\n")
+    print("\n      ~~~~~~~~~~*****| MINJOUR |*****~~~~~~~~~~           \n")
     print("A simple journaling app to get your thoughts down quickly.\n\n")
     
     while True:
@@ -17,11 +17,11 @@ def main():
         print("Would you like to create a new file or open an existing one?\n")
         user_select = input("Press (n) to create a new file\nPress (o) to open an existing file\nPress (q) to quit\n")
 
-        if user_select == "n":
+        if user_select.strip() == "n":
             # Allows the user to name the file where entries will be stored, defaults to "entries.json"
             file_name = file_io.name_file()
 
-        elif user_select == "o":
+        elif user_select.strip() == "o":
             # Lists existing files in the current directory and prompts the user to select one
             print("")
             file_list = file_io.list_files()
@@ -35,9 +35,13 @@ def main():
                 print(f"\nYou have selected {file_select} to store your entries.")
                 file_name = file_select          
 
-        elif user_select == "q":
+        elif user_select.strip() == "q":
             print("\n~~~~~~((((Goodbye!))))~~~~~~\n")
             return
+
+        else:
+            print("\nInvalid input. Please try again.\n")
+            continue
 
         while True:
 

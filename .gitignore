@@ -1,0 +1,20 @@
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore virtual environment
+venv/
+env/
+
+# Ignore system files
+.DS_Store
+
+# Ignore IDE/editor settings
+.idea/
+.vscode/
+
+# Ignore json files
+.json
+
+# ignore test file
+test.py
