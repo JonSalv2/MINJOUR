@@ -14,7 +14,7 @@ env/
 .vscode/
 
 # Ignore json files
-.json
+*.json
 
 # ignore test file
 test.py
