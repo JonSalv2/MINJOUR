@@ -7,7 +7,7 @@ import json
 
 
 def main():
-    """ Main function to run the journaling app """
+    """ Main function to run the app """
 
     print("\n      ~~~~~~~~~~*****| MINJOUR |*****~~~~~~~~~~           \n")
     print("A simple journaling app to get your thoughts down quickly.\n\n")
@@ -24,16 +24,16 @@ def main():
         elif user_select.strip() == "o":
             # Lists existing files in the current directory and prompts the user to select one
             print("")
-            file_list = file_io.list_files()
-            file_select = input("\nEnter the name of the file you want to open\n").strip() + ".json"
+            file_map = file_io.list_files()
+            file_select = input("\nEnter the name of the file you want to open\n").strip()
 
-            if file_select not in file_list:
-                print(f"\n{file_select} does not exist in the current directory. Please create a new file or choose an existing one.\n")
+            if file_select not in file_map:
+                print(f"\n{file_select} does not exist in the entries directory. Please create a new file or choose an existing one.\n")
                 continue
             else:
                 # Sets the file name to the selected file
-                print(f"\nYou have selected {file_select} to store your entries.")
-                file_name = file_select          
+                print(f"\nYou have selected {file_select}.")
+                file_name = file_map[file_select]          
 
         elif user_select.strip() == "q":
             print("\n~~~~~~((((Goodbye!))))~~~~~~\n")
