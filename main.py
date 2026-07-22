@@ -4,6 +4,25 @@
 import actions
 import file_io
 import json
+import sys
+import platform
+import subprocess
+
+
+def _relaunch_in_terminal_if_needed():
+    """
+    When MINJOUR.app is double-clicked in Finder, macOS starts the frozen
+    binary without attaching a TTY, so input()/print() have nowhere to go.
+    Detect that case and re-launch it ourselves inside Terminal.app.
+    """
+    if not getattr(sys, "frozen", False):
+        return
+    if platform.system() != "Darwin":
+        return
+    if sys.stdin and sys.stdin.isatty():
+        return
+    subprocess.Popen(["open", "-a", "Terminal", sys.executable])
+    sys.exit(0)
 
 
 def main():
@@ -109,4 +128,5 @@ def main():
 
 
 if __name__ == '__main__':
+    _relaunch_in_terminal_if_needed()
     main()

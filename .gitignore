@@ -12,9 +12,14 @@ env/
 # Ignore IDE/editor settings
 .idea/
 .vscode/
+.claude/
 
-# Ignore json files
-*.json
+# Ignore the user entries
+entries/
 
 # ignore test file
 test.py
+
+# PyInstaller build artifacts
+build/
+dist/
