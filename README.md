@@ -22,7 +22,11 @@ Open the app, type your thought, close the app. Entries are timestamped and save
 3. Drag `MINJOUR.app` into your `Applications` folder (optional but recommended).
 4. Double-click `MINJOUR.app`and a Terminal window will open running MINJOUR.
 
-> **First launch:** macOS will show a warning that the app is from an unidentified developer. Right-click `MINJOUR.app` → **Open** → **Open** in the dialog. macOS remembers the choice, so subsequent launches work with a normal double-click.
+> **First launch:** macOS will show a warning that MINJOUR is from an unidentified developer and block it. To allow it:
+> 1. Double-click `MINJOUR.app` and dismiss the warning.
+> 2. Open **System Settings → Privacy & Security**.
+> 3. Scroll to the **Security** section — you'll see *"MINJOUR was blocked to protect your Mac."* Click **Open Anyway** and confirm with your password / Touch ID.
+> 4. Double-click `MINJOUR.app` again — it opens normally from now on.
 
 The app runs natively on both Apple Silicon and Intel Macs.
 
@@ -108,7 +112,7 @@ PyInstaller builds are platform-specific. Therefore, a build on macOS produces a
 
 ### macOS-specific notes
 
-- **Gatekeeper warning on first launch.** Because MINJOUR is not signed with an Apple Developer certificate, macOS will show *"MINJOUR can't be opened because Apple cannot check it for malicious software"* the first time the app is opened. Right-click `MINJOUR.app` → **Open** → **Open** in the confirmation dialog. macOS remembers the choice, so subsequent launches work with a normal double-click.
+- **Gatekeeper warning on first launch.** Because MINJOUR is not signed with an Apple Developer certificate, macOS will block it on first launch with the warning *"MINJOUR can't be opened because Apple cannot check it for malicious software."* To allow it, open **System Settings → Privacy & Security**, scroll to the **Security** section, and click **Open Anyway** next to the MINJOUR block message. macOS remembers the exception, so future launches work with a normal double-click. Advanced users can skip the dialog by running `xattr -d com.apple.quarantine /path/to/MINJOUR.app` in Terminal.
 - **Universal2 build requirement.** Producing a universal2 binary requires a universal2 Python. The official installer from [python.org](https://python.org/downloads/macos) provides one; Homebrew's Python does not. If you want to build for only the host architecture, change `target_arch='universal2'` to `target_arch=None` in [main.spec](main.spec).
 - **`MINJOUR.command`** is a fallback shell launcher for anyone who wants to run the raw binary from the source tree without going through the `.app`.
 
