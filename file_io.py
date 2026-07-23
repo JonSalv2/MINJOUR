@@ -4,9 +4,10 @@ import json
 import os
 from pathlib import Path
 
-# Directory for the .json files
-ROOT = Path(__file__).parent
-ENTRIES_DIR = ROOT / "entries"
+# Directory for the .json files.
+# Uses ~/Documents/MINJOUR so journals are visible to the user, backed up by
+# Time Machine/iCloud Drive, and survive re-installs of the app.
+ENTRIES_DIR = Path.home() / "Documents" / "MINJOUR"
 
 
 def list_files():

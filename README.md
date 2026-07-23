@@ -75,11 +75,12 @@ MINJOUR/
 ├── main.py           # Entry point and main menu loop
 ├── actions.py        # Add, read, delete entry logic
 ├── file_io.py        # File naming, listing, and JSON I/O
-├── entries/          # Your journal files live here (gitignored)
 ├── main.spec         # PyInstaller build configuration
 ├── MINJOUR.icns      # macOS app icon
 └── MINJOUR.command   # Double-clickable launcher (macOS)
 ```
+
+Your journal files are stored at `~/Documents/MINJOUR/` — one `.json` file per journal. This location is user-visible in Finder, auto-backed up by Time Machine and iCloud Drive, and survives app re-installs.
 
 ---
 
